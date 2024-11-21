@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import "./App.css";
+import LoginPage from "./components/auth/Loginpage";
+import SignUpPage from "./components/auth/SignUpPage";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import Feed from "./components/Feed";
+import Sidebar from "./components/layout/Sidebar";
+import Friends from "./components/Friends";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      navigate("/feed");
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AuthProvider>
+        {location.pathname !== "/login" && location.pathname !== "/signup" && (
+          <Sidebar />
+        )}
+
+        <Routes>
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/friends" element={<Friends />} />
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }
