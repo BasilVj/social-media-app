@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useQuery } from "@apollo/client";
+import { GET_POSTS } from "../GraphQL/Queries";
 
 const Post = () => {
+  const { currentUser } = useAuthContext();
+  const userId = currentUser?.uid;
+  const { error, loading, data } = useQuery(GET_POSTS, {
+    variables: { userId },
+    skip: !userId,
+  });
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <div className="bg-white/70 p-8 rounded-lg shadow-md max-w-md h-[408px]">
       <div className="flex items-center justify-between mb-4">
@@ -40,7 +53,7 @@ const Post = () => {
         />
       </div>
 
-     {/*  <div className="flex items-center justify-between text-gray-500">
+      {/*  <div className="flex items-center justify-between text-gray-500">
         <div className="flex items-center space-x-2">
           <button className="flex justify-center items-center gap-2 px-2 hover:bg-gray-50 rounded-full p-1">
             <svg
