@@ -15,7 +15,7 @@ const Post = () => {
   }, [data]);
 
   return (
-    <div className="bg-white/70 p-8 rounded-lg shadow-md max-w-md h-[408px]">
+    <div className="bg-white/70 p-8 rounded-lg shadow-md w-[45vw] h-[408px] w">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2 justify-center">
           <img

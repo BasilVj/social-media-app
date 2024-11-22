@@ -15,6 +15,7 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
+import { UserContext, UserProvider } from "./context/UserContext";
 
 function App() {
   const navigate = useNavigate();
@@ -48,15 +49,17 @@ function App() {
     <div>
       <ApolloProvider client={client}>
         <AuthProvider>
-          {location.pathname !== "/login" &&
-            location.pathname !== "/signup" && <Sidebar />}
+          <UserProvider>
+            {location.pathname !== "/login" &&
+              location.pathname !== "/signup" && <Sidebar />}
 
-          <Routes>
-            <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/feed" element={<Feed />} />
-            <Route path="/friends" element={<Friends />} />
-          </Routes>
+            <Routes>
+              <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/feed" element={<Feed />} />
+              <Route path="/friends" element={<Friends />} />
+            </Routes>
+          </UserProvider>
         </AuthProvider>
       </ApolloProvider>
     </div>

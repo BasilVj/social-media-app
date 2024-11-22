@@ -2,17 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../types/auth";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useUserContext } from "../../hooks/useUserContext";
+import { useMutation } from "@apollo/client";
+import { CREATE_USER_MUTATION } from "../../GraphQL/Mutations";
 
 const SignUpPage = () => {
   const [userData, setUserData] = useState<signUp>({
     email: "",
+    username: "",
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState("");
+  const [signUpError, setSignUpError] = useState("");
   const [loading, setLoading] = useState(false);
   const { signUp } = useAuthContext();
+  const { loggedUser, setLoggedUser } = useUserContext();
   const navigate = useNavigate();
+  const [createUser, { error }] = useMutation(CREATE_USER_MUTATION);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
@@ -22,17 +28,50 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Check if passwords match
     if (userData.password !== userData.confirmPassword) {
-      return setError("Passwords don't match");
+      return setSignUpError("Passwords don't match");
     }
+
     try {
-      setError("");
+      setSignUpError("");
       setLoading(true);
-      await signUp(userData.email, userData.password);
-      navigate("/login");
+
+      // Sign up user
+      const userCredential = await signUp(userData.email, userData.password);
+   
+      // Create user with GraphQL mutation
+      const response = await createUser({
+        variables: {
+          userId: userCredential.user.uid,
+          username: userData.username,
+          profilePic: "https://avatar.iran.liara.run/public/boy?username=Ash",
+        },
+      });
+      // Ensure response is correct
+      const createdUser = response.data.createUser;
+
+      // Set logged-in user data
+      setLoggedUser({
+        username: createdUser.username,
+        userId: createdUser.userId,
+        profilePic: createdUser.profilePic,
+        followers: null,
+      });
+
+      // Error handling
+      if (error) {
+        console.log(error);
+      }
+
+      // Redirect to the feed page
+      navigate("/feed");
     } catch (error) {
-      setError("Failed to create an account");
+      setSignUpError("Failed to create an account");
+      console.log(error); // Log the error for debugging
     }
+
     setLoading(false);
   };
 
@@ -54,7 +93,7 @@ const SignUpPage = () => {
           </Link>
         </p>
         <div className="text-center pt-2">
-          <span className="text-red-600">{error && error}</span>
+          <span className="text-red-600">{signUpError && signUpError}</span>
         </div>
       </div>
 
@@ -82,6 +121,26 @@ const SignUpPage = () => {
               </div>
             </div>
 
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Username
+              </label>
+              <div className="mt-1">
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  required
+                  className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Enter a Username"
+                  onChange={handleChange}
+                  value={userData.username}
+                />
+              </div>
+            </div>
             <div>
               <label
                 htmlFor="password"
