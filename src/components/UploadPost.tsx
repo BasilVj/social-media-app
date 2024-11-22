@@ -121,7 +121,7 @@ const UploadPost = () => {
             </label>
           </div>
           <div>
-            <button className="flex gap-1">
+            <div className="flex gap-1 cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -137,7 +137,7 @@ const UploadPost = () => {
                 />
               </svg>
               <span className="hidden md:block">People</span>
-            </button>
+            </div>
           </div>
           <div className="grow text-right">
             <button

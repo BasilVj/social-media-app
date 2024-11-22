@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { PostType } from "../hooks/useFetchPosts";
 import { formatDistanceToNow } from "date-fns";
+import useFetchUserById from "../hooks/useFetchUserById";
+import Avatar from "./Avatar";
 
 const Post = ({ description, imageUrl, postedTime, userId }: PostType) => {
   //formatting time for post
@@ -8,17 +10,23 @@ const Post = ({ description, imageUrl, postedTime, userId }: PostType) => {
     addSuffix: true,
   });
 
+  const [username, setUsername] = useState<string>("");
+
+  const { data } = useFetchUserById(userId);
+
+  useEffect(() => {
+    if (data) {
+      setUsername(data.getCurrentUser.username);
+    }
+  }, [data]);
+
   return (
     <div className="bg-white/70 p-8 rounded-lg shadow-md w-[45vw] h-[408px] w">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2 justify-center">
-          <img
-            src="https://img.freepik.com/free-vector/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.jpg?t=st=1732118308~exp=1732121908~hmac=6b004b97138d4f11fa0ebb6f5c6dc69cde0fd5c4d1034afa36d60ff9b90abe18&w=740"
-            alt="User Avatar"
-            className="w-8 h-8 rounded-full"
-          />
+          <Avatar url={data.getCurrentUser?.profilePic} />
           <div className="ps-1">
-            <p className="text-gray-800 font-semibold">John Doe</p>
+            <p className="text-gray-800 font-semibold">{username}</p>
             <p className="text-gray-500 text-sm">
               {formattedTime.replace("about", "")}
             </p>
