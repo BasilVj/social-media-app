@@ -38,3 +38,12 @@ export const GET_SUGGESTED_USERS = gql`
     }
   }
 `;
+
+export const GET_FOLLOWERS = gql`
+  query getFollowers($userId: String!) {
+    getFollowers(userId: $userId) {
+      userId
+      username
+    }
+  }
+`;

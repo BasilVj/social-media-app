@@ -49,3 +49,14 @@ export const ADD_FOLLOWSER_MUTATION = gql`
     }
   }
 `;
+
+export const REMOVE_FOLLOWER_MUTATION = gql`
+  mutation removeFollower($currentUserId: String!, $followerId: String!) {
+    removeFollower(currentUserId: $currentUserId, followerId: $followerId) {
+      followers {
+        userId
+        username
+      }
+    }
+  }
+`;
