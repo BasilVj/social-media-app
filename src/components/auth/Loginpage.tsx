@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../types/auth";
 import { useAuthContext } from "../../hooks/useAuthContext";
+
 const LoginPage = () => {
   const [userData, setUserData] = useState<login>({
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const [loginError, setLoginError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const { login } = useAuthContext();
   const navigate = useNavigate();
@@ -22,14 +24,15 @@ const LoginPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      setError("");
-      setLoading(true);
+      setLoginError("");
+      setIsLoading(true);
       await login(userData.email, userData.password);
+
       navigate("/feed");
     } catch (error) {
-      setError("Failed to log in");
+      setLoginError("Failed to log in");
     }
-    setLoading(false);
+    setIsLoading(false);
   };
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -49,7 +52,7 @@ const LoginPage = () => {
           </Link>
         </p>
         <div className="text-center pt-2">
-          <span className="text-red-600">{error && error}</span>
+          <span className="text-red-600">{loginError && loginError}</span>
         </div>
       </div>
 
@@ -98,7 +101,7 @@ const LoginPage = () => {
 
             <div>
               <button
-                disabled={loading}
+                disabled={isLoading}
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >

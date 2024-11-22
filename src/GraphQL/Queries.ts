@@ -6,7 +6,21 @@ export const GET_POSTS = gql`
       description
       imageUrl
       userId
-      id
+      postedTime
+    }
+  }
+`;
+
+export const GET_USER = gql`
+  query getCurrentUser($userId: String!) {
+    getCurrentUser(userId: $userId) {
+      userId
+      username
+      profilePic
+      followers {
+        userId
+        username
+      }
     }
   }
 `;

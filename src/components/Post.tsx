@@ -1,18 +1,12 @@
 import React, { useEffect } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useQuery } from "@apollo/client";
-import { GET_POSTS } from "../GraphQL/Queries";
+import { PostType } from "../hooks/useFetchPosts";
+import { formatDistanceToNow } from "date-fns";
 
-const Post = () => {
-  const { currentUser } = useAuthContext();
-  const userId = currentUser?.uid;
-  const { error, loading, data } = useQuery(GET_POSTS, {
-    variables: { userId },
-    skip: !userId,
+const Post = ({ description, imageUrl, postedTime, userId }: PostType) => {
+  //formatting time for post
+  const formattedTime = formatDistanceToNow(new Date(postedTime), {
+    addSuffix: true,
   });
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <div className="bg-white/70 p-8 rounded-lg shadow-md w-[45vw] h-[408px] w">
@@ -25,7 +19,9 @@ const Post = () => {
           />
           <div className="ps-1">
             <p className="text-gray-800 font-semibold">John Doe</p>
-            <p className="text-gray-500 text-sm">Posted 2 hours ago</p>
+            <p className="text-gray-500 text-sm">
+              {formattedTime.replace("about", "")}
+            </p>
           </div>
         </div>
         <div className="text-gray-500 cursor-pointer">
@@ -34,20 +30,12 @@ const Post = () => {
       </div>
 
       <div className="mb-4">
-        <p className="text-gray-800">
-          Just another day with adorable kittens! 🐱{" "}
-          <a href="" className="text-blue-600">
-            #CuteKitten
-          </a>
-          <a href="" className="text-blue-600">
-            #AdventureCat
-          </a>
-        </p>
+        <p className="text-gray-800">{description}</p>
       </div>
 
       <div className="mb-4">
         <img
-          src="https://imgs.search.brave.com/5GC0MnK6_wt7hWR4Ozcrr8tib3sC6GlXWN8o7n1tB-U/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/ZXhwZXJ0cGhvdG9n/cmFwaHkuY29tL3dw/LWNvbnRlbnQvdXBs/b2Fkcy8yMDE5LzA2/L2ZvcmVzdF9sYW5k/c2NhcGUuanBn"
+          src={imageUrl}
           alt="Post Image"
           className="w-full h-48 object-cover rounded-md"
         />

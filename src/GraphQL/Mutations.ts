@@ -13,3 +13,21 @@ export const CREATE_USER_MUTATION = gql`
     }
   }
 `;
+
+export const CREATE_POST_MUTATION = gql`
+  mutation createPost(
+    $userId: String!
+    $description: String!
+    $imageUrl: String!
+  ) {
+    createPost(
+      userId: $userId
+      description: $description
+      imageUrl: $imageUrl
+    ) {
+      userId
+      description
+      imageUrl
+    }
+  }
+`;
