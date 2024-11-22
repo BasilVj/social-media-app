@@ -11,7 +11,7 @@ const UploadPost = () => {
   const [description, setDescription] = useState("");
   const { loggedUser } = useUserContext();
 
-  const [createUser, { error, loading }] = useMutation(CREATE_POST_MUTATION);
+  const [createPost, { error, loading }] = useMutation(CREATE_POST_MUTATION);
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
@@ -51,7 +51,7 @@ const UploadPost = () => {
     }
 
     try {
-      await createUser({
+      await createPost({
         variables: {
           userId: loggedUser?.userId,
           description: description,
@@ -64,8 +64,6 @@ const UploadPost = () => {
     } catch (error) {
       console.log(error);
     }
-
-    e.preventDefault();
   };
 
   return (

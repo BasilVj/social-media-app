@@ -1,10 +1,16 @@
 import React, { useEffect } from "react";
 import Post from "./Post";
-import SuggestedForYou from "./SuggestedForYou";
 import useFetchPosts from "../hooks/useFetchPosts";
+import useAuthRedirect from "../hooks/useAuthRedirect";
+import SuggestedFollowers from "./SuggestedFollowers";
 
 const Posts = () => {
   const { posts, loading } = useFetchPosts();
+  const { currentUser } = useAuthRedirect();
+
+  useEffect(() => {
+    console.log(currentUser?.uid);
+  }, []);
 
   return (
     <div className="flex justify-end min-h-screen pt-2 bg-[#e6f7ff]">
@@ -20,9 +26,11 @@ const Posts = () => {
             />
           ))}
       </div>
-      <div className="me-5">
-        <SuggestedForYou />
-      </div>
+      {currentUser?.uid !== "" && (
+        <div className="me-5">
+          <SuggestedFollowers userId={currentUser?.uid!} />
+        </div>
+      )}
     </div>
   );
 };

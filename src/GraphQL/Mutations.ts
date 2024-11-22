@@ -31,3 +31,21 @@ export const CREATE_POST_MUTATION = gql`
     }
   }
 `;
+
+export const ADD_FOLLOWSER_MUTATION = gql`
+  mutation addFollower(
+    $currentUserId: String!
+    $followerId: String!
+    $followerUsername: String!
+  ) {
+    addFollower(
+      currentUserId: $currentUserId
+      followerId: $followerId
+      followerUsername: $followerUsername
+    ) {
+      currentUserId
+      followerId
+      followerUsername
+    }
+  }
+`;

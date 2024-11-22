@@ -11,12 +11,14 @@ const Post = ({ description, imageUrl, postedTime, userId }: PostType) => {
   });
 
   const [username, setUsername] = useState<string>("");
+  const [profilePic, setProfilePic] = useState<string>("");
 
   const { data } = useFetchUserById(userId);
 
   useEffect(() => {
     if (data) {
       setUsername(data.getCurrentUser.username);
+      setProfilePic(data.getCurrentUser?.profilePic);
     }
   }, [data]);
 
@@ -24,7 +26,7 @@ const Post = ({ description, imageUrl, postedTime, userId }: PostType) => {
     <div className="bg-white/70 p-8 rounded-lg shadow-md w-[45vw] h-[408px] w">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2 justify-center">
-          <Avatar url={data.getCurrentUser?.profilePic} />
+          <Avatar url={profilePic} />
           <div className="ps-1">
             <p className="text-gray-800 font-semibold">{username}</p>
             <p className="text-gray-500 text-sm">

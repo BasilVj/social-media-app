@@ -24,3 +24,17 @@ export const GET_USER = gql`
     }
   }
 `;
+
+export const GET_SUGGESTED_USERS = gql`
+  query getSuggestUsers($userId: String!) {
+    getSuggestUsers(userId: $userId) {
+      userId
+      username
+      profilePic
+      followers {
+        userId
+        username
+      }
+    }
+  }
+`;
