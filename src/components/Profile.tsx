@@ -1,32 +1,37 @@
-import useAuthRedirect from "../hooks/useAuthRedirect";
+import { useEffect, useState } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 import useFetchPosts from "../hooks/useFetchPosts";
-import { useUserContext } from "../hooks/useUserContext";
+import useFetchUserById from "../hooks/useFetchUserById";
 import Avatar from "./Avatar";
 import Post from "./Post";
+import { appUser } from "../context/UserContext";
 
-export default function Profile() {
-  const { loggedUser } = useUserContext();
+type Profile = {
+  userId: string;
+};
+export default function Profile({ userId }: Profile) {
+  const { data } = useFetchUserById(userId);
   const { posts, loading } = useFetchPosts();
-  const { currentUser } = useAuthRedirect();
+  const [user, setUser] = useState<appUser>();
+
+  useEffect(() => {
+    if (data) {
+      setUser(data.getCurrentUser);
+    }
+  }, [data]);
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#e6f7ff] pt-5">
       {/* User Profile Card */}
       <div className="bg-white/70 w-[45%] p-3 rounded-lg shadow-md mb-5">
         <div className="flex items-center">
-          <Avatar
-            width="w-24"
-            url={
-              loggedUser?.profilePic
-                ? loggedUser.profilePic
-                : "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80"
-            }
-          />
+          <Avatar width="w-24" url={user?.profilePic ? user.profilePic : ""} />
           <div className="ml-3">
             <h1 className="text-xl font-semibold">
-              {loggedUser?.username || "User"}
+              {user?.username || "User"}
             </h1>
             <p className="text-sm text-gray-400">
-              <span className="mr-1">{loggedUser?.followers?.length || 0}</span>
+              <span className="mr-1">{user?.followers?.length || 0}</span>
               <span className="font-semibold">followers</span>
             </p>
           </div>
