@@ -56,12 +56,6 @@ const Friends = () => {
                 <h2 className="text-gray-600 mb-6">
                   Start adding friends to your network
                 </h2>
-                <button
-                  className="bg-blue-500 text-white font-medium py-2 px-4 rounded hover:bg-blue-600 transition duration-300"
-                  onClick={() => navigate("/feed")}
-                >
-                  Add Friends
-                </button>
               </div>
             </div>
           )}

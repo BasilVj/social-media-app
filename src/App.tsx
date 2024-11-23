@@ -21,6 +21,7 @@ import ProfilePage from "./components/ProfilePage";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
+  const SOCIAL_MEDIA_API = process.env.REACT_APP_SOCIAL_MEDIA_API;
 
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
@@ -32,7 +33,9 @@ function App() {
 
   const link = from([
     errorLink,
-    new HttpLink({ uri: "http://localhost:8080/graphql" }),
+    new HttpLink({
+      uri: `${SOCIAL_MEDIA_API}/graphql`,
+    }),
   ]);
 
   const client = new ApolloClient({
