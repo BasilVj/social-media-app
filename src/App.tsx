@@ -48,10 +48,8 @@ function App() {
   });
 
   useEffect(() => {
-    if (location.pathname === "/") {
-      navigate("/feed");
-    }
-  }, [location.pathname, navigate]);
+    navigate("/feed");
+  }, []);
 
   return (
     <div>
