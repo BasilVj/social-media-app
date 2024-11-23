@@ -9,6 +9,7 @@ type Avatar = {
 };
 
 const Avatar = ({ url, width, editable, setProfilePicture }: Avatar) => {
+  const IMGBB_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
   const [isUploading, setIsUploading] = useState(false);
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
@@ -16,13 +17,10 @@ const Avatar = ({ url, width, editable, setProfilePicture }: Avatar) => {
       const file = e.target.files?.[0];
       const formData = new FormData();
       formData.append("image", file);
-      fetch(
-        "https://api.imgbb.com/1/upload?key=9a7e20a9f13e2c0a918731d0a1d99864",
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
+      fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+        method: "POST",
+        body: formData,
+      })
         .then((response) => response.json())
         .then((data) => {
           if (data && data.data && data.data.url) {

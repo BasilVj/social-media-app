@@ -8,6 +8,10 @@ export type PostType = {
   imageUrl: string;
   postedTime: string;
   userId: string;
+  mentions: {
+    username: string;
+    userId: string;
+  }[];
 };
 
 const useFetchFollowersPosts = () => {

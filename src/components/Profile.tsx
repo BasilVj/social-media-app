@@ -77,6 +77,7 @@ export default function Profile({ userId }: Profile) {
               <div className="mb-3 md:w-[60%] xl:w-[auto]">
                 {posts.map((post, index) => (
                   <Post
+                    mentions={post.mentions}
                     description={post.description}
                     imageUrl={post.imageUrl}
                     postedTime={post.postedTime}

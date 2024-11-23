@@ -19,15 +19,21 @@ export const CREATE_POST_MUTATION = gql`
     $userId: String!
     $description: String!
     $imageUrl: String!
+    $mentions: [MentionInputType]
   ) {
     createPost(
       userId: $userId
       description: $description
       imageUrl: $imageUrl
+      mentions: $mentions
     ) {
       userId
       description
       imageUrl
+      mentions {
+        userId
+        username
+      }
     }
   }
 `;

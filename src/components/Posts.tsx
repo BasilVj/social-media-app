@@ -19,6 +19,7 @@ const Posts = () => {
           {posts && posts.length > 0 ? (
             posts.map((post, index) => (
               <Post
+                mentions={post.mentions}
                 description={post.description}
                 imageUrl={post.imageUrl}
                 postedTime={post.postedTime}
@@ -30,7 +31,8 @@ const Posts = () => {
             <div className="w-[95%] xl:w-[45vw]">
               <div className="bg-white shadow-lg rounded-lg p-8 text-center">
                 <h1 className="text-2xl font-bold text-gray-800 mb-4">
-                  You don’t have any Followers
+                  You don’t have any Followers or No posts Avaible to show right
+                  now
                 </h1>
                 <h2 className="text-gray-600 mb-6">
                   Start adding friends to your network to view their posts

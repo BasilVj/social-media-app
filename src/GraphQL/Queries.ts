@@ -7,6 +7,10 @@ export const GET_POSTS = gql`
       imageUrl
       userId
       postedTime
+      mentions {
+        userId
+        username
+      }
     }
   }
 `;
@@ -18,6 +22,10 @@ export const GET_FOLLOWERS_POSTS = gql`
       imageUrl
       userId
       postedTime
+      mentions {
+        userId
+        username
+      }
     }
   }
 `;

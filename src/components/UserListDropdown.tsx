@@ -1,26 +1,52 @@
-import React from "react";
+import React, { useEffect, useId, useState } from "react";
 import Select, { MultiValue } from "react-select";
+import useFetchFollowers from "../hooks/useFetchFollowers";
+import { Follower } from "./Friends";
 
-const UserListDropdown = () => {
-  const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
+type UserListDropdown = {
+  userId: string;
+  setSelectedFollowers: React.Dispatch<React.SetStateAction<Follower[]>>;
+};
 
-  const handleChange = (
-    e: MultiValue<{
-      value: string;
-      label: string;
-    }>
-  ) => {
-    console.log(e);
+type Options = {
+  label: string;
+  value: string;
+};
+
+const UserListDropdown = ({
+  userId,
+  setSelectedFollowers,
+}: UserListDropdown) => {
+  const [followers, setFollowers] = useState<Options[]>([]);
+  const { followersData, followersLoading, followersRefetch } =
+    useFetchFollowers(userId);
+
+  const handleChange = (e: MultiValue<Options>) => {
+    const filteredData = e.map((ev) => {
+      return {
+        username: ev.label,
+        userId: ev.value,
+      };
+    });
+    setSelectedFollowers(filteredData);
   };
+
+  useEffect(() => {
+    if (followersData) {
+      const followersList = followersData.getFollowers.map(
+        (follower: Follower) => ({
+          label: follower.username,
+          value: follower.userId,
+        })
+      );
+      setFollowers(followersList);
+    }
+  }, [followersData]);
 
   return (
     <div>
       <Select
-        options={options}
+        options={followers}
         onChange={handleChange}
         name="users"
         isMulti
