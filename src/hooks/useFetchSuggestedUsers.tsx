@@ -8,7 +8,7 @@ const useFetchSuggestedUsers = (userId: string) => {
     skip: !userId,
   });
 
-  return { data, refetch };
+  return { data, refetch, loading };
 };
 
 export default useFetchSuggestedUsers;

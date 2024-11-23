@@ -9,7 +9,7 @@ type SuggestedFollowers = {
 
 const SuggestedFollowers = ({ userId }: SuggestedFollowers) => {
   const [suggestedUsers, setSuggestedUsers] = useState<appUser[]>();
-  const { data } = useFetchSuggestedUsers(userId);
+  const { data, loading } = useFetchSuggestedUsers(userId);
   useEffect(() => {
     if (data) {
       setSuggestedUsers(data.getSuggestUsers);

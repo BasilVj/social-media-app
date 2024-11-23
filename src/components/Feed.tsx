@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import { GET_USER } from "../GraphQL/Queries";
 import Posts from "./Posts";
 import SuggestedFollowers from "./SuggestedFollowers";
+import Loader from "./layout/Loader";
 
 const Feed = () => {
   const { currentUser } = useAuthRedirect();
@@ -36,7 +37,8 @@ const Feed = () => {
         className="flex w-full bg-[#e6f7ff] pt-5 flex-col items-center 
       md:items-end xl:items-center justify-center "
       >
-        <UploadPost />
+        {!loading ? <UploadPost /> : <Loader />}
+
         <Posts />
       </div>
     </div>
