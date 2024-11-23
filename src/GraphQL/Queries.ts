@@ -11,6 +11,17 @@ export const GET_POSTS = gql`
   }
 `;
 
+export const GET_FOLLOWERS_POSTS = gql`
+  query getFollowersPosts($userId: String!) {
+    getFollowersPosts(userId: $userId) {
+      description
+      imageUrl
+      userId
+      postedTime
+    }
+  }
+`;
+
 export const GET_USER = gql`
   query getCurrentUser($userId: String!) {
     getCurrentUser(userId: $userId) {

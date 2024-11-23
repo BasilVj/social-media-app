@@ -16,6 +16,7 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import { UserContext, UserProvider } from "./context/UserContext";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/feed" element={<Feed />} />
               <Route path="/friends" element={<Friends />} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Routes>
           </UserProvider>
         </AuthProvider>

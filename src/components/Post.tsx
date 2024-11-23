@@ -23,7 +23,7 @@ const Post = ({ description, imageUrl, postedTime, userId }: PostType) => {
   }, [data]);
 
   return (
-    <div className="bg-white/70 p-8 rounded-lg shadow-md w-[45vw] h-[408px] w">
+    <div className="bg-white/70 p-8 rounded-lg shadow-md w-[45vw] h-[408px] mb-4">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2 justify-center">
           <Avatar url={profilePic} />

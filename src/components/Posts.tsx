@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
 import Post from "./Post";
-import useFetchPosts from "../hooks/useFetchPosts";
 import useAuthRedirect from "../hooks/useAuthRedirect";
 import SuggestedFollowers from "./SuggestedFollowers";
+import useFetchFollowersPosts from "../hooks/useFetchFollowersPosts";
 
 const Posts = () => {
-  const { posts, loading } = useFetchPosts();
+  const { posts, loading } = useFetchFollowersPosts();
   const { currentUser } = useAuthRedirect();
 
   useEffect(() => {
-    console.log(currentUser?.uid);
-  }, []);
+    if (posts) {
+      console.log(posts);
+    }
+  }, [posts]);
 
   return (
     <div className="flex justify-end min-h-screen pt-2 bg-[#e6f7ff]">
       <div className="me-16 mb-3">
-        {posts.length > 0 &&
+        {posts && posts.length > 0 ? (
           posts.map((post, index) => (
             <Post
               description={post.description}
@@ -24,7 +26,19 @@ const Posts = () => {
               userId={post.userId}
               key={index}
             />
-          ))}
+          ))
+        ) : (
+          <div className="w-[45vw]">
+            <div className="bg-white shadow-lg rounded-lg p-8 text-center">
+              <h1 className="text-2xl font-bold text-gray-800 mb-4">
+                You don’t have any Followers
+              </h1>
+              <h2 className="text-gray-600 mb-6">
+                Start adding friends to your network to view their posts
+              </h2>
+            </div>
+          </div>
+        )}
       </div>
       {currentUser?.uid !== "" && (
         <div className="me-5">
