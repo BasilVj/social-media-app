@@ -8,7 +8,7 @@ import useFetchSuggestedUsers from "../hooks/useFetchSuggestedUsers";
 import useFetchFollowers from "../hooks/useFetchFollowers";
 import { Follower } from "./Friends";
 
-type Accounts = {
+type AccountsType = {
   user: appUser;
   setSuggestedUsers: React.Dispatch<
     React.SetStateAction<appUser[] | undefined>
@@ -22,7 +22,7 @@ const Accounts = ({
   setSuggestedUsers,
   currentUserId,
   setFollowers,
-}: Accounts) => {
+}: AccountsType) => {
   const [addFollower] = useMutation(ADD_FOLLOWSER_MUTATION);
   const { refetch } = useFetchSuggestedUsers(currentUserId);
   const {followersRefetch } =
