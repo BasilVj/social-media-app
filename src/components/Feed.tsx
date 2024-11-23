@@ -31,8 +31,11 @@ const Feed = () => {
   }, [data]);
 
   return (
-    <div className="flex justify-center w-full items-center">
-      <div className="flex w-full bg-[#e6f7ff] pt-5 flex-col items-center">
+    <div className="flex justify-center w-full items-center ">
+      <div
+        className="flex w-full bg-[#e6f7ff] pt-5 flex-col items-center 
+      md:items-end xl:items-center justify-center "
+      >
         <UploadPost />
         <Posts />
       </div>

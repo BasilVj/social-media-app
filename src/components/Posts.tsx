@@ -6,9 +6,9 @@ import useFetchFollowersPosts from "../hooks/useFetchFollowersPosts";
 
 const Posts = () => {
   const { posts, loading } = useFetchFollowersPosts();
-  
+
   return (
-    <div className="min-h-screen pt-2 bg-[#e6f7ff]">
+    <div className="min-h-screen pt-2 bg-[#e6f7ff] ps-5 md:ps-0 md:w-[60%] xl:w-auto">
       <div className="mb-3">
         {posts && posts.length > 0 ? (
           posts.map((post, index) => (
@@ -21,7 +21,7 @@ const Posts = () => {
             />
           ))
         ) : (
-          <div className="w-[45vw]">
+          <div className="w-[90%] xl:w-[45vw]">
             <div className="bg-white shadow-lg rounded-lg p-8 text-center">
               <h1 className="text-2xl font-bold text-gray-800 mb-4">
                 You don’t have any Followers
