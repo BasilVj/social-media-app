@@ -2,7 +2,13 @@ import React, { useEffect } from "react";
 import "./App.css";
 import LoginPage from "./components/auth/Loginpage";
 import SignUpPage from "./components/auth/SignUpPage";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import Feed from "./components/Feed";
 import Sidebar from "./components/layout/Sidebar";
 import Friends from "./components/Friends";
@@ -47,10 +53,6 @@ function App() {
     link: link,
   });
 
-/*   useEffect(() => {
-    navigate("/feed");
-  }, []); */
-
   return (
     <div>
       <ApolloProvider client={client}>
@@ -60,6 +62,7 @@ function App() {
               location.pathname !== "/signup" && <Sidebar />}
 
             <Routes>
+              <Route path="/" element={<Navigate to="/feed" />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/feed" element={<Feed />} />
