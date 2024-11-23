@@ -3,12 +3,12 @@ import { useQuery } from "@apollo/client";
 import { GET_USER } from "../GraphQL/Queries";
 
 const useFetchUserById = (userId: string) => {
-  const { error, loading, data } = useQuery(GET_USER, {
+  const { error, loading, data, refetch } = useQuery(GET_USER, {
     variables: { userId },
     skip: !userId,
   });
 
-  return { data };
+  return { data, refetch };
 };
 
 export default useFetchUserById;

@@ -5,14 +5,32 @@ import useFetchUserById from "../hooks/useFetchUserById";
 import Avatar from "./Avatar";
 import Post from "./Post";
 import { appUser } from "../context/UserContext";
+import { useMutation } from "@apollo/client";
+import { UPDATE_PROFILE_PIC_MUTATION } from "../GraphQL/Mutations";
 
 type Profile = {
   userId: string;
 };
 export default function Profile({ userId }: Profile) {
-  const { data } = useFetchUserById(userId);
+  const { data, refetch } = useFetchUserById(userId);
   const { posts, loading } = useFetchPosts();
   const [user, setUser] = useState<appUser>();
+  const [profilePicture, setProfilePicture] = useState<string>("");
+  const [updateUserProfilePic, { error }] = useMutation(
+    UPDATE_PROFILE_PIC_MUTATION
+  );
+
+  const handleProfilePicUpdate = async (profilePic: string) => {
+    await updateUserProfilePic({
+      variables: {
+        userId: userId,
+        profilePic: profilePic,
+      },
+    }).then(async () => {
+      const updatedProfile = await refetch();
+      setUser(updatedProfile.data.getCurrentUser);
+    });
+  };
 
   useEffect(() => {
     if (data) {
@@ -20,12 +38,24 @@ export default function Profile({ userId }: Profile) {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (profilePicture !== "") {
+      handleProfilePicUpdate(profilePicture);
+    }
+  }, [profilePicture]);
+
   return (
     <div className="flex flex-col items-center min-h-screen bg-[#e6f7ff] pt-5">
       {/* User Profile Card */}
       <div className="bg-white/70 w-[45%] p-3 rounded-lg shadow-md mb-5">
         <div className="flex items-center">
-          <Avatar width="w-24" url={user?.profilePic ? user.profilePic : ""} />
+          <Avatar
+            setProfilePicture={setProfilePicture}
+            editable
+            width="w-24"
+            url={user?.profilePic ? user.profilePic : ""}
+          />
+
           <div className="ml-3">
             <h1 className="text-xl font-semibold">
               {user?.username || "User"}

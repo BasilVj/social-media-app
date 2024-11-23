@@ -38,7 +38,7 @@ const Accounts = ({ user, setSuggestedUsers, currentUserId }: Accounts) => {
     }
   };
   return (
-    <div className="flex items-center bg-[#e6f7ff] text-white p-4 w-[300px]">
+    <div className="flex items-center bg-[#e6f7ff] text-white p-4">
       <Avatar url={user.profilePic} />
       <div className="ml-4 flex flex-col pe-2">
         <h3 className="text-lg font-normal text-black">{user.username}</h3>

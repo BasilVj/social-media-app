@@ -36,13 +36,12 @@ const FriendInfo = ({ follower, currentUSerId, setFollowers }: FriendInfo) => {
       });
 
       if (data?.removeFollower?.followers) {
-        console.log("Updated Followers:", data.removeFollower.followers);
         setFollowers(data.removeFollower.followers); // Update the state
       } else {
-        console.log("No followers returned from the backend");
+        console.log("No followers found");
       }
     } catch (error) {
-      console.error("Error in unfollowing user:", error);
+      console.error(error);
     }
   };
 

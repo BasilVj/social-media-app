@@ -67,7 +67,7 @@ const UploadPost = () => {
   };
 
   return (
-    <div className="bg-white shadow-md shadow-gray-300 rounded-md mb-5 p-5 w-[45.5%] me-[4rem]">
+    <div className="bg-white shadow-md shadow-gray-300 rounded-md mb-5 p-5 w-[45.5%]">
       <form onSubmit={handleCreatePost}>
         <div className="flex gap-2">
           <div>

@@ -4,6 +4,7 @@ import useAuthRedirect from "../hooks/useAuthRedirect";
 import { useQuery } from "@apollo/client";
 import { GET_FOLLOWERS } from "../GraphQL/Queries";
 import { useNavigate } from "react-router-dom";
+import SuggestedFollowers from "./SuggestedFollowers";
 
 export type Follower = {
   userId: string;
@@ -30,13 +31,15 @@ const Friends = () => {
 
   return (
     <div
-      className={`flex justify-center pt-9 bg-[#e6f7ff] ${
-        followers.length > 0 ? "" : "h-screen items-center"
-      }`}
+      className={`flex md:justify-end justify-center items-center 
+        flex-col md:items-end xl:flex-row gap-10 pt-9 bg-[#e6f7ff] 
+        pe-3 p-5 xl:p-0 md:pe-10 xl:pe-0  ${
+          followers.length > 0 ? "xl:h-screen" : "h-screen items-center"
+        }`}
     >
       {followers && userId && followers.length > 0 ? (
-        <div className="w-[35%] h-[95vh] bg-white/70 shadow-md shadow-gray-300 rounded-md mb-5 overflow-y-scroll">
-          <h2 className="text-3xl pt-4 ps-4">Friends</h2>
+        <div className="w-full md:w-[65%] xl:w-[35%] xl:h-[85vh] bg-white/70 shadow-md shadow-gray-300 rounded-md mb-5 overflow-y-scroll">
+          <h2 className="text-3xl pt-4 ps-4 pb-2">Friends</h2>
           {followers.map((follower, index) => (
             <FriendInfo
               setFollowers={setFollowers}
@@ -62,6 +65,12 @@ const Friends = () => {
               Add Friends
             </button>
           </div>
+        </div>
+      )}
+
+      {currentUser?.uid !== "" && (
+        <div className=" w-full md:w-[65%] xl:w-[35%]">
+          <SuggestedFollowers userId={currentUser?.uid!} />
         </div>
       )}
     </div>

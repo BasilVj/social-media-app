@@ -5,6 +5,7 @@ import { useUserContext } from "../hooks/useUserContext";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../GraphQL/Queries";
 import Posts from "./Posts";
+import SuggestedFollowers from "./SuggestedFollowers";
 
 const Feed = () => {
   const { currentUser } = useAuthRedirect();
@@ -30,11 +31,11 @@ const Feed = () => {
   }, [data]);
 
   return (
-    <div>
-      <div className="flex justify-center bg-[#e6f7ff] pt-5">
+    <div className="flex justify-center w-full items-center">
+      <div className="flex w-full bg-[#e6f7ff] pt-5 flex-col items-center">
         <UploadPost />
+        <Posts />
       </div>
-      <Posts />
     </div>
   );
 };

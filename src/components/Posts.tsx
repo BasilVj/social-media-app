@@ -6,17 +6,10 @@ import useFetchFollowersPosts from "../hooks/useFetchFollowersPosts";
 
 const Posts = () => {
   const { posts, loading } = useFetchFollowersPosts();
-  const { currentUser } = useAuthRedirect();
-
-  useEffect(() => {
-    if (posts) {
-      console.log(posts);
-    }
-  }, [posts]);
-
+  
   return (
-    <div className="flex justify-end min-h-screen pt-2 bg-[#e6f7ff]">
-      <div className="me-16 mb-3">
+    <div className="min-h-screen pt-2 bg-[#e6f7ff]">
+      <div className="mb-3">
         {posts && posts.length > 0 ? (
           posts.map((post, index) => (
             <Post
@@ -40,11 +33,6 @@ const Posts = () => {
           </div>
         )}
       </div>
-      {currentUser?.uid !== "" && (
-        <div className="me-5">
-          <SuggestedFollowers userId={currentUser?.uid!} />
-        </div>
-      )}
     </div>
   );
 };

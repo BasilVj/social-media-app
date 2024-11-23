@@ -60,3 +60,14 @@ export const REMOVE_FOLLOWER_MUTATION = gql`
     }
   }
 `;
+
+export const UPDATE_PROFILE_PIC_MUTATION = gql`
+  mutation updateUserProfilePic($userId: String!, $profilePic: String!) {
+    updateUserProfilePic(userId: $userId, profilePic: $profilePic) {
+      followers {
+        userId
+        username
+      }
+    }
+  }
+`;

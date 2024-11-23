@@ -15,7 +15,7 @@ const Sidebar = () => {
     "text-sm md:text-md flex gap-1 md:gap-3 py-2 my-2 hover:bg-blue-500 hover:bg-opacity-20 md:-mx-4 px-6 md:px-4 rounded-md transition-all hover:scale-110 hover:shadow-md shadow-gray-300 items-center";
 
   return (
-    <div className="shadow-lg h-screen me-5 w-[15rem] fixed ps-5 pt-5">
+    <div className="shadow-lg h-screen me-5 w-[15rem] fixed ps-5 pt-5 hidden md:block">
       <div className="px-4 py-2 flex justify-between md:block shadow-md shadow-gray-500 md:shadow-none">
         <h2 className="text-gray-400 mb-3 hidden md:block">Navigation</h2>
         <div>
