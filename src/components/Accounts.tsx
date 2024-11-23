@@ -6,18 +6,28 @@ import { ADD_FOLLOWSER_MUTATION } from "../GraphQL/Mutations";
 import { useAuthContext } from "../hooks/useAuthContext";
 import useFetchSuggestedUsers from "../hooks/useFetchSuggestedUsers";
 import { useUserContext } from "../hooks/useUserContext";
+import useFetchFollowers from "../hooks/useFetchFollowers";
+import { Follower } from "./Friends";
 
 type Accounts = {
   user: appUser;
   setSuggestedUsers: React.Dispatch<
     React.SetStateAction<appUser[] | undefined>
   >;
+  setFollowers: React.Dispatch<React.SetStateAction<Follower[]>>;
   currentUserId: string;
 };
 
-const Accounts = ({ user, setSuggestedUsers, currentUserId }: Accounts) => {
+const Accounts = ({
+  user,
+  setSuggestedUsers,
+  currentUserId,
+  setFollowers,
+}: Accounts) => {
   const [addFollower, { error, loading }] = useMutation(ADD_FOLLOWSER_MUTATION);
   const { data, refetch } = useFetchSuggestedUsers(currentUserId);
+  const { followersData, followersLoading, followersRefetch } =
+    useFetchFollowers(currentUserId);
 
   const { currentUser } = useAuthContext();
   const handleFollowUser = async () => {
@@ -30,8 +40,11 @@ const Accounts = ({ user, setSuggestedUsers, currentUserId }: Accounts) => {
         },
       }).then(async () => {
         console.log("Success");
+
         const updatedData = await refetch();
         setSuggestedUsers(updatedData.data.getSuggestUsers);
+        const updatedFollowersData = await followersRefetch();
+        setFollowers(updatedFollowersData.data.getFollowers);
       });
     } catch (error) {
       console.log(error);
