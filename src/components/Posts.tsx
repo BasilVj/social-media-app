@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import Post from "./Post";
-import useAuthRedirect from "../hooks/useAuthRedirect";
-import SuggestedFollowers from "./SuggestedFollowers";
 import useFetchFollowersPosts from "../hooks/useFetchFollowersPosts";
 import Loader from "./layout/Loader";
 

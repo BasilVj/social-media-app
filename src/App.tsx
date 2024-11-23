@@ -15,7 +15,7 @@ import {
   InMemoryCache,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import { UserContext, UserProvider } from "./context/UserContext";
+import { UserProvider } from "./context/UserContext";
 import ProfilePage from "./components/ProfilePage";
 
 function App() {
@@ -23,10 +23,10 @@ function App() {
   const location = useLocation();
   const SOCIAL_MEDIA_API = process.env.REACT_APP_SOCIAL_MEDIA_API;
 
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
+  const errorLink = onError(({ graphQLErrors }) => {
     if (graphQLErrors) {
-      graphQLErrors.map(({ message, locations, path }) => {
-        alert(`Graphql error ${message}`);
+      graphQLErrors.map(({ message }) => {
+        console.log(`Graphql error ${message}`);
       });
     }
   });

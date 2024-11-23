@@ -18,7 +18,7 @@ const useFetchPosts = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
   const { currentUser } = useAuthContext();
   const userId = currentUser?.uid;
-  const { error, loading, data } = useQuery(GET_POSTS, {
+  const { loading, data } = useQuery(GET_POSTS, {
     variables: { userId },
     skip: !userId,
   });

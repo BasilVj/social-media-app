@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../types/auth";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -16,7 +16,7 @@ const SignUpPage = () => {
   const [signUpError, setSignUpError] = useState("");
   const [loading, setLoading] = useState(false);
   const { signUp } = useAuthContext();
-  const { loggedUser, setLoggedUser } = useUserContext();
+  const { setLoggedUser } = useUserContext();
   const navigate = useNavigate();
   const [createUser, { error }] = useMutation(CREATE_USER_MUTATION);
 

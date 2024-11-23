@@ -5,7 +5,6 @@ import { useMutation } from "@apollo/client";
 import { ADD_FOLLOWSER_MUTATION } from "../GraphQL/Mutations";
 import { useAuthContext } from "../hooks/useAuthContext";
 import useFetchSuggestedUsers from "../hooks/useFetchSuggestedUsers";
-import { useUserContext } from "../hooks/useUserContext";
 import useFetchFollowers from "../hooks/useFetchFollowers";
 import { Follower } from "./Friends";
 
@@ -24,9 +23,9 @@ const Accounts = ({
   currentUserId,
   setFollowers,
 }: Accounts) => {
-  const [addFollower, { error, loading }] = useMutation(ADD_FOLLOWSER_MUTATION);
-  const { data, refetch } = useFetchSuggestedUsers(currentUserId);
-  const { followersData, followersLoading, followersRefetch } =
+  const [addFollower] = useMutation(ADD_FOLLOWSER_MUTATION);
+  const { refetch } = useFetchSuggestedUsers(currentUserId);
+  const {followersRefetch } =
     useFetchFollowers(currentUserId);
 
   const { currentUser } = useAuthContext();

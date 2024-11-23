@@ -15,7 +15,7 @@ const FriendInfo = ({ follower, currentUSerId, setFollowers }: FriendInfo) => {
   const [username, setUsername] = useState<string>("");
   const [profilePic, setProfilePic] = useState<string>("");
   const [followerCount, setFollowerCount] = useState<number>();
-  const [removeFollower, { error, loading }] = useMutation(
+  const [removeFollower] = useMutation(
     REMOVE_FOLLOWER_MUTATION
   );
   useEffect(() => {

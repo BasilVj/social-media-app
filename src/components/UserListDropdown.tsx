@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select, { MultiValue } from "react-select";
 import useFetchFollowers from "../hooks/useFetchFollowers";
 import { Follower } from "./Friends";

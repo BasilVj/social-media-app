@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAuthContext } from "../hooks/useAuthContext";
 import useFetchPosts from "../hooks/useFetchPosts";
 import useFetchUserById from "../hooks/useFetchUserById";
 import Avatar from "./Avatar";
@@ -17,7 +16,7 @@ export default function Profile({ userId }: Profile) {
   const { posts, loading } = useFetchPosts();
   const [user, setUser] = useState<appUser>();
   const [profilePicture, setProfilePicture] = useState<string>("");
-  const [updateUserProfilePic, { error }] = useMutation(
+  const [updateUserProfilePic] = useMutation(
     UPDATE_PROFILE_PIC_MUTATION
   );
 

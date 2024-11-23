@@ -18,7 +18,7 @@ const useFetchFollowersPosts = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
   const { currentUser } = useAuthContext();
   const userId = currentUser?.uid;
-  const { error, loading, data } = useQuery(GET_FOLLOWERS_POSTS, {
+  const { loading, data } = useQuery(GET_FOLLOWERS_POSTS, {
     variables: { userId },
     skip: !userId,
   });

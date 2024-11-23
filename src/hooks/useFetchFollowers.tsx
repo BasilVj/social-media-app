@@ -1,9 +1,8 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
 import { GET_FOLLOWERS } from "../GraphQL/Queries";
 
 const useFetchFollowers = (userId: string) => {
-  const { error, loading, data, refetch } = useQuery(GET_FOLLOWERS, {
+  const { loading, data, refetch } = useQuery(GET_FOLLOWERS, {
     variables: { userId },
     skip: !userId,
   });

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Accounts from "./Accounts";
 import useFetchSuggestedUsers from "../hooks/useFetchSuggestedUsers";
 import { appUser } from "../context/UserContext";
-import { ApolloQueryResult, OperationVariables } from "@apollo/client";
 import { Follower } from "./Friends";
 
 type SuggestedFollowers = {
@@ -12,7 +11,7 @@ type SuggestedFollowers = {
 
 const SuggestedFollowers = ({ userId, setFollowers }: SuggestedFollowers) => {
   const [suggestedUsers, setSuggestedUsers] = useState<appUser[]>();
-  const { data, loading } = useFetchSuggestedUsers(userId);
+  const { data } = useFetchSuggestedUsers(userId);
   useEffect(() => {
     if (data) {
       setSuggestedUsers(data.getSuggestUsers);

@@ -5,16 +5,15 @@ import { useUserContext } from "../hooks/useUserContext";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../GraphQL/Queries";
 import Posts from "./Posts";
-import SuggestedFollowers from "./SuggestedFollowers";
 import Loader from "./layout/Loader";
 
 const Feed = () => {
   const { currentUser } = useAuthRedirect();
-  const { setLoggedUser, loggedUser } = useUserContext();
+  const { setLoggedUser} = useUserContext();
 
   const userId = currentUser?.uid;
 
-  const { error, loading, data } = useQuery(GET_USER, {
+  const {loading, data } = useQuery(GET_USER, {
     variables: { userId },
     skip: !userId,
   });

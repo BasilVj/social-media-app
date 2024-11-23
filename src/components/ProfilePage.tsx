@@ -1,4 +1,3 @@
-import React from "react";
 import Profile from "./Profile";
 import { useAuthContext } from "../hooks/useAuthContext";
 

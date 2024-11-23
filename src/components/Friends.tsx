@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FriendInfo from "./FriendInfo";
 import useAuthRedirect from "../hooks/useAuthRedirect";
-import { useNavigate } from "react-router-dom";
 import SuggestedFollowers from "./SuggestedFollowers";
 import Loader from "./layout/Loader";
 import useFetchFollowers from "../hooks/useFetchFollowers";
@@ -15,8 +14,7 @@ const Friends = () => {
   const { currentUser } = useAuthRedirect();
   const [followers, setFollowers] = useState<Follower[]>([]);
   const userId = currentUser?.uid;
-  const navigate = useNavigate();
-  const { followersData, followersLoading, followersRefetch } =
+  const { followersData, followersLoading} =
     useFetchFollowers(userId ? userId : "");
 
   useEffect(() => {

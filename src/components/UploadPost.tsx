@@ -15,7 +15,7 @@ const UploadPost = () => {
   const [selectedFollowers, setSelectedFollowers] = useState<Follower[]>([]);
   const { loggedUser } = useUserContext();
   const [showMentionDropdown, setShowMentionDropdown] = useState(false);
-  const [createPost, { error, loading }] = useMutation(CREATE_POST_MUTATION);
+  const [createPost, { loading }] = useMutation(CREATE_POST_MUTATION);
   const IMGBB_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
