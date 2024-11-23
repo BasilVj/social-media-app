@@ -21,7 +21,7 @@ const Posts = () => {
             />
           ))
         ) : (
-          <div className="w-[90%] xl:w-[45vw]">
+          <div className="w-[95%] xl:w-[45vw]">
             <div className="bg-white shadow-lg rounded-lg p-8 text-center">
               <h1 className="text-2xl font-bold text-gray-800 mb-4">
                 You don’t have any Followers

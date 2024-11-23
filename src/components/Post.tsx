@@ -47,7 +47,7 @@ const Post = ({ description, imageUrl, postedTime, userId }: PostType) => {
         <img
           src={imageUrl}
           alt="Post Image"
-          className="w-full h-48 object-cover rounded-md"
+          className="w-full h-48 object-cover rounded-md xl:object-fill"
         />
       </div>
 

@@ -45,9 +45,9 @@ export default function Profile({ userId }: Profile) {
   }, [profilePicture]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-[#e6f7ff] pt-5">
+    <div className="flex flex-col items-center md:items-end xl:items-center min-h-screen bg-[#e6f7ff] pt-5">
       {/* User Profile Card */}
-      <div className="bg-white/70 w-[45%] p-3 rounded-lg shadow-md mb-5">
+      <div className="bg-white/70 xl:w-[45%] md:w-[55.5%] p-3 md:me-10 xl:me-0 rounded-lg shadow-md mb-5">
         <div className="flex items-center">
           <Avatar
             setProfilePicture={setProfilePicture}
@@ -69,10 +69,10 @@ export default function Profile({ userId }: Profile) {
       </div>
 
       {/* User Posts Card */}
-      <div className="flex pt-2 bg-[#e6f7ff]">
-        <div className="mb-3">
-          {posts.length > 0 ? (
-            posts.map((post, index) => (
+      <div className="flex p-3 bg-[#e6f7ff] md:justify-end xl:justify-center items-center">
+        {posts.length > 0 ? (
+          <div className="mb-3 md:w-[60%] xl:w-[auto]">
+            {posts.map((post, index) => (
               <Post
                 description={post.description}
                 imageUrl={post.imageUrl}
@@ -80,17 +80,19 @@ export default function Profile({ userId }: Profile) {
                 userId={post.userId}
                 key={index}
               />
-            ))
-          ) : (
-            <div className="w-[45vw]">
+            ))}
+          </div>
+        ) : (
+          <div className="mb-3 md:w-[56.5vw] md:me-7 xl:me-0 xl:w-[auto]">
+            <div className="w-full xl:w-[45vw]">
               <div className="bg-white shadow-lg rounded-lg p-8 text-center">
                 <h1 className="text-2xl font-bold text-gray-800 mb-4">
                   You don’t have any Posts
                 </h1>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
