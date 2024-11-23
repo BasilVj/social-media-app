@@ -24,7 +24,7 @@ function App() {
   const SOCIAL_MEDIA_API = process.env.REACT_APP_SOCIAL_MEDIA_API;
 
   if (!SOCIAL_MEDIA_API) {
-    return;
+    return null;
   }
 
   const errorLink = onError(({ graphQLErrors }) => {
@@ -49,9 +49,9 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      return navigate("/feed");
+      navigate("/feed");
     }
-  }, []);
+  }, [location.pathname, navigate]);
 
   return (
     <div>
