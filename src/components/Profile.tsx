@@ -8,10 +8,10 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_PROFILE_PIC_MUTATION } from "../GraphQL/Mutations";
 import Loader from "./layout/Loader";
 
-type Profile = {
+type ProfileType = {
   userId: string;
 };
-export default function Profile({ userId }: Profile) {
+export default function Profile({ userId }: ProfileType) {
   const { data, refetch } = useFetchUserById(userId);
   const { posts, loading } = useFetchPosts();
   const [user, setUser] = useState<appUser>();

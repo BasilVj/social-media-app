@@ -4,12 +4,12 @@ import useFetchSuggestedUsers from "../hooks/useFetchSuggestedUsers";
 import { appUser } from "../context/UserContext";
 import { Follower } from "./Friends";
 
-type SuggestedFollowers = {
+type SuggestedFollowersType = {
   userId: string;
   setFollowers: React.Dispatch<React.SetStateAction<Follower[]>>;
 };
 
-const SuggestedFollowers = ({ userId, setFollowers }: SuggestedFollowers) => {
+const SuggestedFollowers = ({ userId, setFollowers }: SuggestedFollowersType) => {
   const [suggestedUsers, setSuggestedUsers] = useState<appUser[]>();
   const { data } = useFetchSuggestedUsers(userId);
   useEffect(() => {

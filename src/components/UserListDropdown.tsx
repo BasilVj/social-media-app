@@ -3,7 +3,7 @@ import Select, { MultiValue } from "react-select";
 import useFetchFollowers from "../hooks/useFetchFollowers";
 import { Follower } from "./Friends";
 
-type UserListDropdown = {
+type UserListDropdownType = {
   userId: string;
   setSelectedFollowers: React.Dispatch<React.SetStateAction<Follower[]>>;
 };
@@ -16,7 +16,7 @@ type Options = {
 const UserListDropdown = ({
   userId,
   setSelectedFollowers,
-}: UserListDropdown) => {
+}: UserListDropdownType) => {
   const [followers, setFollowers] = useState<Options[]>([]);
   const { followersData, followersLoading, followersRefetch } =
     useFetchFollowers(userId);

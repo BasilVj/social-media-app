@@ -23,6 +23,10 @@ function App() {
   const location = useLocation();
   const SOCIAL_MEDIA_API = process.env.REACT_APP_SOCIAL_MEDIA_API;
 
+  if (!SOCIAL_MEDIA_API) {
+    return;
+  }
+
   const errorLink = onError(({ graphQLErrors }) => {
     if (graphQLErrors) {
       graphQLErrors.map(({ message }) => {
@@ -45,7 +49,7 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      navigate("/feed");
+      return navigate("/feed");
     }
   }, []);
 

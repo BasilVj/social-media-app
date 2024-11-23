@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Post from "./Post";
 import useFetchFollowersPosts from "../hooks/useFetchFollowersPosts";
 import Loader from "./layout/Loader";

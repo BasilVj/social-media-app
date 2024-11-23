@@ -4,20 +4,22 @@ import useFetchUserById from "../hooks/useFetchUserById";
 import { useMutation } from "@apollo/client";
 import { REMOVE_FOLLOWER_MUTATION } from "../GraphQL/Mutations";
 
-type FriendInfo = {
+type FriendInfoType = {
   follower: Follower;
   currentUSerId: string;
   setFollowers: React.Dispatch<React.SetStateAction<Follower[]>>;
 };
 
-const FriendInfo = ({ follower, currentUSerId, setFollowers }: FriendInfo) => {
+const FriendInfo = ({
+  follower,
+  currentUSerId,
+  setFollowers,
+}: FriendInfoType) => {
   const { data } = useFetchUserById(follower.userId);
   const [username, setUsername] = useState<string>("");
   const [profilePic, setProfilePic] = useState<string>("");
   const [followerCount, setFollowerCount] = useState<number>();
-  const [removeFollower] = useMutation(
-    REMOVE_FOLLOWER_MUTATION
-  );
+  const [removeFollower] = useMutation(REMOVE_FOLLOWER_MUTATION);
   useEffect(() => {
     if (data) {
       setFollowerCount(data.getCurrentUser.followers.length);

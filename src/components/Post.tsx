@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { PostType } from "../hooks/useFetchPosts";
 import { formatDistanceToNow } from "date-fns";
 import useFetchUserById from "../hooks/useFetchUserById";

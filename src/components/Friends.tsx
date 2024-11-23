@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import FriendInfo from "./FriendInfo";
 import useAuthRedirect from "../hooks/useAuthRedirect";
 import SuggestedFollowers from "./SuggestedFollowers";
@@ -14,8 +14,9 @@ const Friends = () => {
   const { currentUser } = useAuthRedirect();
   const [followers, setFollowers] = useState<Follower[]>([]);
   const userId = currentUser?.uid;
-  const { followersData, followersLoading} =
-    useFetchFollowers(userId ? userId : "");
+  const { followersData, followersLoading } = useFetchFollowers(
+    userId ? userId : ""
+  );
 
   useEffect(() => {
     if (followersData) {

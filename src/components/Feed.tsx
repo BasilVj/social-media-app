@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import useAuthRedirect from "../hooks/useAuthRedirect";
 import UploadPost from "./UploadPost";
 import { useUserContext } from "../hooks/useUserContext";

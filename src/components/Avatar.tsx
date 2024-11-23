@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Loader from "./layout/Loader";
 
-type Avatar = {
+type AvatarType = {
   url: string;
   width?: string;
   editable?: boolean;
   setProfilePicture?: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Avatar = ({ url, width, editable, setProfilePicture }: Avatar) => {
+const Avatar = ({ url, width, editable, setProfilePicture }: AvatarType) => {
   const IMGBB_API_KEY = process.env.REACT_APP_FIREBASE_API_KEY;
   const [isUploading, setIsUploading] = useState(false);
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
