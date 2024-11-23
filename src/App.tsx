@@ -47,9 +47,9 @@ function App() {
     link: link,
   });
 
-  useEffect(() => {
+/*   useEffect(() => {
     navigate("/feed");
-  }, []);
+  }, []); */
 
   return (
     <div>
